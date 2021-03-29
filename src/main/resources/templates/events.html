@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Event Feed</title>
+<link th:replace="fragments/head">
+</head>
+<body>
+	<div class="container-fluid">
+		<div th:replace="fragments/navbar"></div>
+		<ul class="nav nav-tabs">
+			<li role="presentation"
+				th:classappend="${filter == 'all' ? 'active' : '' }"><a
+				href="/events">All</a></li>
+		</ul>
+		<br />
+		<h2>Events</h2>
+		<div class="list-group" th:each="event:${eventList}">
+			<div class="list-group-item list-group-item-action">
+				<div class="d-flex w-100 justify-content-between">
+					<h5>
+						<a style="color: #1da1f2;" class="username"
+							th:href="@{/users/} + ${event.user.username}">@<span
+							th:text="${event.user.username}"></span>
+						</a>
+					</h5>
+					<small th:text="${event.date}"></small>
+				</div>
+				<p th:utext="${event.message}"></p>
+				<form  th:action="@{/event/} + ${eventToRsvp}" method = "post">
+					<button style="float: right;" type="Submit"
+						class="btn btn-lg btn-primary">RSVP</button>
+				</form> 
+			</div>
+		</div>
+		<div th:if="${#lists.isEmpty(eventList)}">
+			<h3>No events have been created yet</h3>
+		</div>
+	</div>
+	<div th:if="${#lists.isEmpty(eventList) and filter == 'all'}">
+		<h3>No events have been created yet</h3>
+	</div>
+	<div th:if="${#lists.isEmpty(eventList) and filter == 'following'}">
+		<h3>No events have been created by your followers</h3>
+	</div>
+	<script th:replace="fragments/scripts"></script>
+</body>
+</html>

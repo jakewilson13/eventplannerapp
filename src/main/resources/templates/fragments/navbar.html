@@ -1,0 +1,37 @@
+<div th:fragment="navbar" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"> 
+      <i class="fas fa-calendar-check"></i> Event Planner App
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" 
+      data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto" sec:authorize="isAuthenticated()">
+        <li class="nav-item active">
+          <a class="nav-link" href="/events">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/events/new">Plan an Event!</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active" sec:authorize="isAuthenticated()">
+          <a class="nav-link" th:href="@{|/users/${#authentication.name}|}">
+            @<span sec:authentication="name"></span>
+          </a>
+        </li>
+        <li class="nav-item active" sec:authorize="isAuthenticated()">
+          <a class="nav-link" href="../logout">Logout</a>
+        </li>
+        <li class="nav-item active" sec:authorize="!isAuthenticated()">
+          <a class="nav-link" href="../signup">Sign up</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
