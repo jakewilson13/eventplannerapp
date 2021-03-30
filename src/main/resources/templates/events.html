@@ -29,7 +29,7 @@
 				</div>
 				<p th:utext="${event.message}"></p>
 				<form  th:action="@{/event/} + ${eventToRsvp}" method = "post">
-					<button style="float: right;" type="Submit"
+					<button style="float: right;" type="Submit" value="up"
 						class="btn btn-lg btn-primary">RSVP</button>
 				</form> 
 			</div>

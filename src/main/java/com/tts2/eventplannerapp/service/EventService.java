@@ -31,11 +31,14 @@ public class EventService {
 
 	
 	public Event findEventById(Long id) {
+		System.out.println("under findById");
 		Optional<Event> optionalEvent = eventRepository.findById(id);
+		System.out.println("before null");
 		
 		Event event = null;
 		
 		if(optionalEvent.isPresent()) {
+			System.out.println("hello");
 			event = optionalEvent.get();
 			return event;
 		} else {

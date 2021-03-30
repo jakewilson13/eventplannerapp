@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tts2.eventplannerapp.model.Event;
 import com.tts2.eventplannerapp.model.EventDisplay;
@@ -26,32 +27,23 @@ public class RsvpController {
 	EventService eventService;
 
 
-	@PostMapping(value = "/event/{enabled}")
-	public String rsvp(@PathVariable(value = "enabled") String username, Event event, Boolean enabled, Long id, HttpServletRequest request,
-			Model model) {
-		User user = userService.getLoggedInUser();
-		enabled = event.getRsvp();
-		List<EventDisplay> events = eventService.findAllByUser(user);
-//		Boolean rsvp = true;
-	  //if(enabled.equals(enabled))	
-		if(enabled == false) {
-		event.setRsvp(true);
-		eventService.save(event);
-		System.out.println("hello");
-		model.addAttribute("rsvp", enabled);
-		} else {
-			event.setRsvp(false);
-		}
-		return "redirect:" + request.getHeader("Referer");
-	}
-
-//	@PostMapping(value = "/unrsvp/{event}")
-//	public String unrsvp(@PathVariable(value = "event") String username, Long id, HttpServletRequest request) {
-//		User loggedInUser = userService.getLoggedInUser();
-//		
+	//{enabled} is not correct
+	// get event user wants to rsvp for
+	
+//	@PostMapping(value = "/event/{id}")
+//	public String rsvp(@PathVariable (value = "id") Long id,  @RequestParam String submit, Event event, HttpServletRequest request,
+//			Model model) {
+//		//getting the event by Id
 //		Event eventToRsvp = eventService.findEventById(id);
-//		eventToRsvp.
-//		userService.save(evenToUnRsvp);
+//		if(submit.equals("up")) {
+//			System.out.println("hello");
+//			if(eventToRsvp != null) {
+//				event.setRsvp(true);
+//				eventService.save(event);
+//				model.addAttribute("eventToRsvp", eventToRsvp);
+//			} 
+//			
+//		}
 //		return "redirect:" + request.getHeader("Referer");
 //	}
 }
