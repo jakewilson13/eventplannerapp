@@ -3,13 +3,9 @@ package com.tts2.eventplannerapp.service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +25,13 @@ public class EventService {
 	@Autowired 
 	UserService userService;
 
-	
+
 	public Event findEventById(Long id) {
-		System.out.println("under findById");
 		Optional<Event> optionalEvent = eventRepository.findById(id);
-		System.out.println("before null");
-		
+
 		Event event = null;
-		
+
 		if(optionalEvent.isPresent()) {
-			System.out.println("hello");
 			event = optionalEvent.get();
 			return event;
 		} else {

@@ -1,17 +1,21 @@
 package com.tts2.eventplannerapp.model;
 
-import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 
 
 public class EventDisplay {
-	
-	
+
+	@Id
+	@JoinTable(name = "EVENT")
+	private Long id;
+
+	@JoinColumn(name = "user_id")
 	private User user;
+
 	private String message;
 	private String date;
 	

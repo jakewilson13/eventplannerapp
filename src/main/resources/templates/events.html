@@ -28,10 +28,25 @@
 					<small th:text="${event.date}"></small>
 				</div>
 				<p th:utext="${event.message}"></p>
-				<form  th:action="@{/event/} + ${eventToRsvp}" method = "post">
-					<button style="float: right;" type="Submit" value="up"
-						class="btn btn-lg btn-primary">RSVP</button>
+				
+				<!-- RSVP -->
+				<form  th:action="@{/event/rsvp/}" th:object="${eventToRsvp}" method = "post">
+					<button
+					style="float: right;"
+              class="btn btn-dark"
+              name="submit"
+              value="up"
+              type="submit"
+            >
+              RSVP
+            </button>
 				</form> 
+				<div th:if="${messageSuccess}">
+				<h3>
+					<span class="text-success" th:utext="${messageSuccess}"></span>
+				</h3>
+			</div>
+				<!-- END RSVP -->
 			</div>
 		</div>
 		<div th:if="${#lists.isEmpty(eventList)}">

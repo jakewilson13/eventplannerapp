@@ -68,14 +68,14 @@ public class UserController {
 		model.addAttribute("eventCounts", eventCounts);
 	}
 
-	private void setRsvpStatus(List<User> users, List<User> usersRsvpd, Model model) {
-		HashMap<String, Boolean> rsvpStatus = new HashMap<>();
+	private void setRsvpStatus(List<Event> events, List<User> usersRsvpd, Model model) {
+		HashMap<User, Boolean> rsvpStatus = new HashMap<>();
 		String username = userService.getLoggedInUser().getUsername();
-		for (User user : users) {
-			if (!usersRsvpd.contains(user)) {
-				rsvpStatus.put(user.getUsername(), true);
-			} else if (!user.getUsername().equals(username)) {
-				rsvpStatus.put(user.getUsername(), false);
+		for (Event event : events) {
+			if (!usersRsvpd.contains(event)) {
+				rsvpStatus.put(event.getUser(), true);
+			} else if (!event.getUser().equals(username)) {
+				rsvpStatus.put(event.getUser(), false);
 			}
 		}
 		model.addAttribute("rsvpStatus", rsvpStatus);

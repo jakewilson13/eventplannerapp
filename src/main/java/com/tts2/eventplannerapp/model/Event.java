@@ -3,17 +3,7 @@ package com.tts2.eventplannerapp.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
@@ -41,7 +31,7 @@ public class Event {
 	
 	private String message;
 	
-	@JoinTable(name = "rsvp_status", joinColumns = @JoinColumn(name = "user_id"),
+	@JoinTable(name = "rsvp_id", joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "event_id"))
 	private Boolean rsvp = false;
 	
@@ -64,6 +54,11 @@ public class Event {
 	}
 
 
+	
+
+	public Long getId() {
+		return id;
+	}
 
 
 	public User getUser() {

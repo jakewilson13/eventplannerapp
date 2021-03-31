@@ -1,6 +1,7 @@
 package com.tts2.eventplannerapp.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,25 +28,20 @@ public class RsvpController {
 	EventService eventService;
 
 
-	//{enabled} is not correct
-	// get event user wants to rsvp for
-	
-//	@PostMapping(value = "/event/{id}")
-//	public String rsvp(@PathVariable (value = "id") Long id,  @RequestParam String submit, Event event, HttpServletRequest request,
-//			Model model) {
-//		//getting the event by Id
-//		Event eventToRsvp = eventService.findEventById(id);
-//		if(submit.equals("up")) {
-//			System.out.println("hello");
-//			if(eventToRsvp != null) {
-//				event.setRsvp(true);
-//				eventService.save(event);
-//				model.addAttribute("eventToRsvp", eventToRsvp);
-//			} 
-//			
-//		}
-//		return "redirect:" + request.getHeader("Referer");
-//	}
+	@PostMapping(value = "/event/rsvp/{id}")
+    public String rsvp(@RequestParam String submit, @PathVariable Long id, Event event, Model model) {
+        //getting the event by Id
+        Optional<Event> eventToRsvp = Optional.ofNullable(eventService.findEventById(id));
+        if(submit.equals("up")) {
+            if(eventToRsvp != null) {
+                event.setRsvp(true);
+                eventService.save(event);
+                model.addAttribute("eventToRsvp", eventToRsvp);
+            } 
+            
+        }
+        return "events";
+    }
 }
 
 

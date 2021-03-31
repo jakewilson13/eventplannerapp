@@ -3,7 +3,6 @@ package com.tts2.eventplannerapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tts2.eventplannerapp.model.Event;
@@ -50,6 +51,29 @@ public class EventController {
 		return "newEvent";
 	}
 
+//	@RequestMapping(value = "/event/rsvp/", method = RequestMethod.POST)
+//	public String submitRsvp(Long id, User user, Event event, Model model) {
+//		
+//		 
+//		List <EventDisplay> eventToRsvp = eventService.findAllByUser(userService.getLoggedInUser());
+//			if(eventToRsvp != null) {
+//				System.out.println("hello");
+//				event.setRsvp(true);
+//				eventService.save(event);
+//				model.addAttribute("eventToRsvp", eventToRsvp);
+//			}
+////		User user = userService.getLoggedInUser();
+////		Event event = eventService.findEventById(id);
+////		if(!bindingResult.hasErrors()) {
+////			event.setRsvp(true);
+////			System.out.println("test");
+////			userService.save(user);
+////			model.addAttribute("messageSuccess", "Rsvp successful!");
+////			model.addAttribute("rsvp", event.getRsvp());
+////		}
+//		return "event";
+//	}
+
 	@PostMapping(value = "/events/new")
 	public String submitEventForm(@Valid Event event, BindingResult bindingResult, Model model) {
 		User user = userService.getLoggedInUser();
@@ -60,22 +84,5 @@ public class EventController {
 			model.addAttribute("event", new Event());
 		}
 		return "newEvent";
-	}
-	
-	@PostMapping(value = "/event/{id}")
-	public String rsvp(@PathVariable (value = "id") Long id,  @RequestParam String submit, Event event, HttpServletRequest request,
-			Model model) {
-		//getting the event by Id
-		Event eventToRsvp = eventService.findEventById(id);
-		if(submit.equals("up")) {
-			System.out.println("hello");
-			if(eventToRsvp != null) {
-				event.setRsvp(true);
-				eventService.save(event);
-				model.addAttribute("eventToRsvp", eventToRsvp);
-			} 
-			
-		}
-		return "redirect:" + request.getHeader("Referer");
 	}
 }
