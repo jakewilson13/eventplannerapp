@@ -30,7 +30,7 @@
 				<p th:utext="${event.message}"></p>
 				
 				<!-- RSVP -->
-				<form  th:action="@{/event/rsvp/}" th:object="${eventToRsvp}" method = "post">
+				<form  th:action="@{/event/rsvp/} + ${event.id}" method="post">
 					<button
 					style="float: right;"
               class="btn btn-dark"
