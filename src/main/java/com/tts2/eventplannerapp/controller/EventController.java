@@ -51,29 +51,6 @@ public class EventController {
 		return "newEvent";
 	}
 
-//	@RequestMapping(value = "/event/rsvp/", method = RequestMethod.POST)
-//	public String submitRsvp(Long id, User user, Event event, Model model) {
-//		
-//		 
-//		List <EventDisplay> eventToRsvp = eventService.findAllByUser(userService.getLoggedInUser());
-//			if(eventToRsvp != null) {
-//				System.out.println("hello");
-//				event.setRsvp(true);
-//				eventService.save(event);
-//				model.addAttribute("eventToRsvp", eventToRsvp);
-//			}
-////		User user = userService.getLoggedInUser();
-////		Event event = eventService.findEventById(id);
-////		if(!bindingResult.hasErrors()) {
-////			event.setRsvp(true);
-////			System.out.println("test");
-////			userService.save(user);
-////			model.addAttribute("messageSuccess", "Rsvp successful!");
-////			model.addAttribute("rsvp", event.getRsvp());
-////		}
-//		return "event";
-//	}
-
 	@PostMapping(value = "/events/new")
 	public String submitEventForm(@Valid Event event, BindingResult bindingResult, Model model) {
 		User user = userService.getLoggedInUser();

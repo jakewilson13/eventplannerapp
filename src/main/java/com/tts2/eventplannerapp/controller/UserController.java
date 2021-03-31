@@ -68,7 +68,7 @@ public class UserController {
 		model.addAttribute("eventCounts", eventCounts);
 	}
 
-	private void setRsvpStatus(List<Event> events, List<User> usersRsvpd, Model model) {
+	public void setRsvpStatus(List<Event> events, List<User> usersRsvpd, Model model) {
 		HashMap<User, Boolean> rsvpStatus = new HashMap<>();
 		String username = userService.getLoggedInUser().getUsername();
 		for (Event event : events) {
@@ -81,3 +81,4 @@ public class UserController {
 		model.addAttribute("rsvpStatus", rsvpStatus);
 	}
 }
+

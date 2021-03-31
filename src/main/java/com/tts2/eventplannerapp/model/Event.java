@@ -9,13 +9,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-
-
 @Entity
 public class Event {
 
@@ -31,10 +24,6 @@ public class Event {
 	
 	private String message;
 	
-	@JoinTable(name = "rsvp_id", joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "event_id"))
-	private Boolean rsvp = false;
-	
 	
 	@CreationTimestamp
 	private Date createdAt;
@@ -46,10 +35,9 @@ public class Event {
 	
 	
 	
-	public Event(User user, String message, Boolean rsvp, Date createdAt) {
+	public Event(User user, String message, Date createdAt) {
 		this.user = user;
 		this.message = message;
-		this.rsvp = rsvp;
 		this.createdAt = createdAt;
 	}
 
@@ -60,6 +48,9 @@ public class Event {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public User getUser() {
 		return user;
@@ -77,19 +68,6 @@ public class Event {
 		this.message = message;
 	}
 
-
-	public Boolean getRsvp() {
-		return rsvp;
-	}
-
-
-	public void setRsvp(Boolean rsvp) {
-		this.rsvp = rsvp;
-	}
-
-
-
-
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -100,7 +78,8 @@ public class Event {
 
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", user=" + user + ", message=" + message + ", rsvp=" + rsvp + ", createdAt="
+		return "Event [id=" + id + ", user=" + user + ", message=" + message +  ", createdAt="
 				+ createdAt + "]";
 	}
 }
+

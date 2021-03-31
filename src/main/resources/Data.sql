@@ -1,4 +1,4 @@
-MERGE INTO `role` VALUES
+INSERT INTO `role` VALUES
 (
    1,
    'USER'
