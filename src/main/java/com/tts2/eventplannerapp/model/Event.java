@@ -14,8 +14,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-
 @Entity
 public class Event {
 
@@ -31,8 +29,8 @@ public class Event {
 	
 	private String message;
 	
-	@JoinTable(name = "rsvp_id", joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "event_id"))
+//	@JoinTable(name = "rsvp_id", joinColumns = @JoinColumn(name = "user_id"),
+//			inverseJoinColumns = @JoinColumn(name = "event_id"))
 	private Boolean rsvp = false;
 	
 	
@@ -60,6 +58,9 @@ public class Event {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public User getUser() {
 		return user;

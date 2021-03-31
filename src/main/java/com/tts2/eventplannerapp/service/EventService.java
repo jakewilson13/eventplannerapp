@@ -28,15 +28,7 @@ public class EventService {
 
 	public Event findEventById(Long id) {
 		Optional<Event> optionalEvent = eventRepository.findById(id);
-
-		Event event = null;
-
-		if(optionalEvent.isPresent()) {
-			event = optionalEvent.get();
-			return event;
-		} else {
-			return event;
-		}
+		return optionalEvent.orElse(null);
 	}
 	
 	public List<EventDisplay> findAll() {
@@ -72,6 +64,7 @@ public class EventService {
 		for (Event event : events) {
 			EventDisplay eventDisplay = new EventDisplay();
 			eventDisplay.setUser(event.getUser());
+			eventDisplay.setId(event.getId());
 			eventDisplay.setMessage(event.getMessage());
 			long diffInMillies = Math.abs(now.getTime() - event.getCreatedAt().getTime());
 			long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
@@ -85,7 +78,7 @@ public class EventService {
 		return response;
 	}
 	
-	
+
 //	public boolean alreadyRsvpd(Event e) {
 //		boolean alreadyRsvpd = false;
 //		for(Boolean rsvpd : e.getRsvp()) {

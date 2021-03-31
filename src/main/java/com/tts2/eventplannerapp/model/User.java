@@ -17,6 +17,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 
@@ -55,6 +56,12 @@ public class User {
 	  @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "role_id"))
 	  private Set<Role> roles;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "user_rsvp", joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "event_id"))
+	private Set<Event> rsvp;
+
 	  
 	  public User() {}
 	  
@@ -146,6 +153,14 @@ public class User {
 		this.roles = roles;
 	}
 
+	@JsonIgnore
+	public Set<Event> getRsvp() {
+		return rsvp;
+	}
+
+	public void setRsvp(Set<Event> rsvp) {
+		this.rsvp = rsvp;
+	}
 
 	@Override
 	public String toString() {
