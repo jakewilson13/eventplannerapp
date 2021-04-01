@@ -32,6 +32,7 @@
 				<!-- RSVP -->
 				<form  th:action="@{/event/rsvp/} + ${event.id}" method="post">
 					<button
+							id="submitButton"
 							style="float: right;"
 							class="btn btn-dark"
 							name="submit"
@@ -40,17 +41,19 @@
 					>
 						RSVP
 					</button>
+
+
 					<!-- END RSVP -->
 				</form>
-				<div th:if="${messageSuccess}">
-					<h2>
-						<span class="text-success" th:utext="${messageSuccess}"></span>
-					</h2>
-					<br />
-					<form th:action="@{/events}" method="get">
-						<button class="btn btn-md btn-primary btn-block" type="Submit">Go back to homepage!
-						</button>
-					</form>
+<!--				<div th:if="${successMessage}">-->
+<!--					<h2>-->
+<!--						<span class="text-success" th:utext="${successMessage}"></span>-->
+<!--					</h2>-->
+<!--					<br/>-->
+<!--					<form th:action="@{/events}" method="get">-->
+<!--						<button class="btn btn-md btn-primary btn-block" type="Submit">Go back to homepage!-->
+<!--						</button>-->
+<!--					</form>-->
 			</div>
 		<div th:if="${#lists.isEmpty(eventList)}">
 			<h3>No events have been created yet</h3>

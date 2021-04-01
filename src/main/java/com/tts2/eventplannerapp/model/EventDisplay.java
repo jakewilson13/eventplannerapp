@@ -8,7 +8,6 @@ public class EventDisplay {
 
 	private Long id;
 
-	@JoinColumn(name = "user_id")
 	private User user;
 
 	private String date;

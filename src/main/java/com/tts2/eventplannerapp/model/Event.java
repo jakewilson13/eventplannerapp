@@ -2,6 +2,7 @@ package com.tts2.eventplannerapp.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -28,12 +29,9 @@ public class Event {
 	@CreationTimestamp
 	private Date createdAt;
 
-	
+//	private Set<Event> rsvp;
 	
 	public Event() {}
-	
-	
-	
 	
 	public Event(User user, String message, Date createdAt) {
 		this.user = user;
@@ -75,6 +73,14 @@ public class Event {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
+//	public Set<Event> getRsvp() {
+//		return rsvp;
+//	}
+//
+//	public void setRsvp(Set<Event> rsvp) {
+//		this.rsvp = rsvp;
+//	}
 
 	@Override
 	public String toString() {

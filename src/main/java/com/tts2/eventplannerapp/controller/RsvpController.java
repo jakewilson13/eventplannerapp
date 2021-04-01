@@ -30,10 +30,10 @@ public class RsvpController {
 
 
     @PostMapping(value = "/event/rsvp/{id}")
-    public String rsvp(@RequestParam String submit, @PathVariable Long id, Event event, Model model) {
-//        model.addAttribute("event", new Event());
-        //getting the event by Id
-//        Optional<Event> eventToRsvp = Optional.ofNullable(eventService.findEventById(id));
+    public String rsvp(@RequestParam String submit, @PathVariable Long id, Event event, Model model,
+                       HttpServletRequest request) {
+
+        //getting event by id
         Event eventToRsvp = eventService.findEventById(id);
         System.out.println(eventToRsvp);
         // accessing the currently logged in user
@@ -48,12 +48,23 @@ public class RsvpController {
                 rsvp.add(eventToRsvp);
                 loggedInUser.setRsvp(rsvp);
                 userService.save(loggedInUser);
+                model.addAttribute("successMessage", "Succesfully RSVP'd!");
                 model.addAttribute("eventToRsvp", eventToRsvp);
-                model.addAttribute("messageSuccess", "Succesfully RSVP'd!");
             }
         }
-        return "events";
+        return "redirect:" + request.getHeader("Referer");
     }
+
+//    @PostMapping(value = "/event/unrsvp/{id}")
+//    public String unRsvp(@PathVariable Long id, HttpServletRequest request) {
+//        User loggedInUser = userService.getLoggedInUser();
+//        Event eventToUnrsvp = eventService.findEventById(id);
+//        Set<Event> rsvps = eventToUnrsvp.getUser().getRsvp();
+//        rsvps.remove(loggedInUser);
+//        eventToUnrsvp.setUser((User) rsvps);
+//        eventService.save(eventToUnrsvp);
+//        return "redirect:" + request.getHeader("Referer");
+//    }
 }
 
 

@@ -33,11 +33,11 @@ public class UserController {
 		List<EventDisplay> events = eventService.findAllByUser(user);
 		User loggedInUser = userService.getLoggedInUser();
 
-		boolean isRsvpd = false;
+//		boolean isRsvpd = false;
 
 		boolean isSelfEvent = loggedInUser.getUsername().equals(username);
-		model.addAttribute("isSelfPage", isSelfEvent);
-		model.addAttribute("following", isRsvpd);
+//		model.addAttribute("isSelfEvent", isSelfEvent);
+//		model.addAttribute("isRsvpd", isRsvpd);
 		model.addAttribute("eventList", events);
 		model.addAttribute("user", user);
 		return "user";
@@ -66,19 +66,6 @@ public class UserController {
 			eventCounts.put(user.getUsername(), events.size());
 		}
 		model.addAttribute("eventCounts", eventCounts);
-	}
-
-	public void setRsvpStatus(List<Event> events, List<User> usersRsvpd, Model model) {
-		HashMap<User, Boolean> rsvpStatus = new HashMap<>();
-		String username = userService.getLoggedInUser().getUsername();
-		for (Event event : events) {
-			if (!usersRsvpd.contains(event)) {
-				rsvpStatus.put(event.getUser(), true);
-			} else if (!event.getUser().equals(username)) {
-				rsvpStatus.put(event.getUser(), false);
-			}
-		}
-		model.addAttribute("rsvpStatus", rsvpStatus);
 	}
 }
 

@@ -152,6 +152,8 @@ public class User {
 		this.roles = roles;
 	}
 
+	//it avoids generating recursive JSON
+	//used to ignore all of the information contained with each rsvp
 	@JsonIgnore
 	public Set<Event> getRsvp() {
 		return rsvp;
